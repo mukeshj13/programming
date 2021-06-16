@@ -1,9 +1,7 @@
-package com.m.dynamic;
+package com.welldyne.mx.dao.core;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
 public class LuckyTriplets {
 
@@ -17,7 +15,6 @@ public class LuckyTriplets {
 		}
 		long start = System.currentTimeMillis();
 		int n = findLuckyTriplets(integers);
-
 		long end = System.currentTimeMillis();
 		System.out.println((end - start) + " ms");
 		System.out.println(n);
@@ -26,11 +23,11 @@ public class LuckyTriplets {
 
 	private static int findLuckyTriplets(int[] integers) {
 
-		Map<Integer, List<Integer>> indexMultiples = new HashMap<Integer, List<Integer>>();
+		List<Integer>[] indexMultiples = new LinkedList[integers.length];
 
 		for (int i = 0; i < integers.length; i++) {
 
-			indexMultiples.put(i, getMultiples(integers, i));
+			indexMultiples[i] = getMultiples(integers, i);
 		}
 
 		int luckyTriplets = 0;
@@ -41,16 +38,13 @@ public class LuckyTriplets {
 		return luckyTriplets;
 	}
 
-	private static int getLuckyTripletsFromMultiplesMap(Map<Integer, List<Integer>> indexMultiples, int n) {
+	private static int getLuckyTripletsFromMultiplesMap(List<Integer>[] indexMultiples, int n) {
 
 		int sum = 0;
 
-		for (int i = 0; i < indexMultiples.get(n)
-				.size(); i++) {
+		for (int i = 0; i < indexMultiples[n].size(); i++) {
 
-			sum += indexMultiples.get(indexMultiples.get(n)
-					.get(i))
-					.size();
+			sum += indexMultiples[(indexMultiples[n].get(i))].size();
 		}
 
 		return sum;
@@ -58,7 +52,7 @@ public class LuckyTriplets {
 
 	private static List<Integer> getMultiples(int[] integers, int n) {
 
-		List<Integer> multiples = new ArrayList<>();
+		List<Integer> multiples = new LinkedList<>();
 		for (int i = n + 1; i < integers.length; i++) {
 
 			if (isMultiple(integers[n], integers[i])) {
