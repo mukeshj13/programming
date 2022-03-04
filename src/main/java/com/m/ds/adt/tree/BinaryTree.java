@@ -111,7 +111,7 @@ public class BinaryTree {
 			}
 			if (temp.right != null) {
 
-				traversal.enqueue(temp.left);
+				traversal.enqueue(temp.right);
 
 			}
 

@@ -1,4 +1,4 @@
-package com.welldyne.mx.dao.core;
+package com.m.dynamic;
 
 import java.util.LinkedList;
 import java.util.List;
