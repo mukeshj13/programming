@@ -333,4 +333,47 @@ class Test {
 		return null;
 	}
 
+	public static void solution(int N, int[] R, int[] C) {
+		// board matrix with i rows and j columns
+		int[][] board = new int[N][N];
+		for (int k = 0; k < R.length; k++) {
+			// denote the bomb with -1
+			board[R[k]][C[k]] = -1;
+			updateNeighbourCount(board, R[k], C[k]);
+		}
+
+		for (int i = 0; i < N; i++) {
+			for (int j = 0; j < N; j++) {
+				if (board[i][j] == -1) {
+					System.out.print('B');
+				} else {
+					System.out.print(board[i][j]);
+				}
+			}
+			System.out.println();
+		}
+	}
+
+	private static void updateNeighbourCount(int[][] board, int i, int j) {
+		final int n = board.length;
+		if (i == n - 1 || j == n - 1 || i == 0 || j == 0) {
+			for (int a = i - 1; a < i + 2; a++) {
+				for (int b = j - 1; b < j + 2; b++) {
+					if (a >= 0 && b >= 0 && a < n && b < n) {
+						// if not a bomb, increment count
+						board[a][b] = board[a][b] == -1 ? -1 : board[a][b] + 1;
+					}
+				}
+			}
+		} else {
+			for (int a = i - 1; a < i + 2; a++) {
+				for (int b = j - 1; b < j + 2; b++) {
+					// if not a bomb, increment count
+					board[a][b] = board[a][b] == -1 ? -1 : board[a][b] + 1;
+				}
+			}
+		}
+	}
+
+
 }
